@@ -77,15 +77,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private JSONArray loadJsonArrayFromRaw(){
 
         InputStream is = getResources().openRawResource(R.raw.brazil_players);
-        int size = 0;
-        String json = null;
         try {
-            size = is.available();
+            int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            json = new String(buffer, "UTF-8");
-            return new JSONArray(json);
+            return new JSONArray(new String(buffer, "UTF-8"));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {

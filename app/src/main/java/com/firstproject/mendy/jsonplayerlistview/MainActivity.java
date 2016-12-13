@@ -78,8 +78,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         InputStream is = getResources().openRawResource(R.raw.brazil_players);
         try {
-            int size = is.available();
-            byte[] buffer = new byte[size];
+            byte[] buffer = new byte[is.available()];
             is.read(buffer);
             is.close();
             return new JSONArray(new String(buffer, "UTF-8"));

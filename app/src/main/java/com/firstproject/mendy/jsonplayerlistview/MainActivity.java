@@ -9,9 +9,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,16 +69,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Nullable
     private JSONArray loadJsonArrayFromRaw(){
-
-        InputStream is = getResources().openRawResource(R.raw.brazil_players);
         try {
-            byte[] buffer = new byte[is.available()];
-            is.read(buffer);
-            is.close();
-            return new JSONArray(new String(buffer, "UTF-8"));
-        } catch (IOException e) {
-            e.printStackTrace();
+            return new JSONArray(IOUtils.toString(getResources().openRawResource(R.raw.brazil_players)));
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
